@@ -13,6 +13,6 @@ export class RegisterDto {
   @MinLength(6)
   password: string;
 
-  @IsEnum([UserRole.CUSTOMER, UserRole.ORGANIZER])
+  @IsEnum([UserRole.CUSTOMER, UserRole.ORGANIZER, UserRole.ADMIN])
   role: UserRole;
 }
