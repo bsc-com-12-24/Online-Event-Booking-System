@@ -19,7 +19,7 @@ import { AdminModule } from './admin/admin.module';
         password: config.get('DB_PASSWORD'),
         serviceName: config.get('DB_SERVICE_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+        synchronize:false,
         logging: true,
       }),
     }),
