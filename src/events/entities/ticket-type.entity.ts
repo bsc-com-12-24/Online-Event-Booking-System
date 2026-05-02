@@ -1,21 +1,21 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
 import { Event } from './event.entity';
 
-@Entity('ticket_types')
+@Entity({ name: 'ticket_types' })
 export class TicketType {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
 
-  @Column({ length: 100 })
+  @Column({ name: 'type', length: 100 })
   type: string;
 
-  @Column({ type: 'float' })
+  @Column({ name: 'price', type: 'float' })
   price: number;
 
-  @Column()
+  @Column({ name: 'quantity' })
   quantity: number;
 
-  @Column({ default: 0 })
+  @Column({ name: 'sold', default: 0 })
   sold: number;
 
   @ManyToOne(() => Event, (event) => event.ticketTypes, { onDelete: 'CASCADE' })

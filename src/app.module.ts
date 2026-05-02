@@ -6,6 +6,10 @@ import { UsersModule } from './users/users.module';
 import { AdminModule } from './admin/admin.module';
 import { EventsModule } from './events/events.module';
 import { OrganizerModule } from './organizer/organizer.module';
+import { BookingModule } from './bookings/booking.module';
+import { VerificationModule } from './verification/verification.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
 
 @Module({
   imports: [
@@ -21,7 +25,7 @@ import { OrganizerModule } from './organizer/organizer.module';
         password: config.get('DB_PASSWORD'),
         serviceName: config.get('DB_SERVICE_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+        synchronize: false,
         logging: true,
       }),
     }),
@@ -30,6 +34,10 @@ import { OrganizerModule } from './organizer/organizer.module';
     AdminModule,
     EventsModule,
     OrganizerModule,
+    BookingModule,
+    VerificationModule,  // Add this line
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

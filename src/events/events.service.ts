@@ -106,4 +106,30 @@ export class EventsService {
     const totalRevenue = ticketTypes.reduce((sum, t) => sum + t.price * t.sold, 0);
     return { eventId, totalRevenue, ticketTypes };
   }
+
+  async getTicketTypeById(id: number): Promise<TicketType> {
+    const ticketType = await this.ticketTypeRepo.findOne({
+      where: { id },
+      relations: ['event'],
+    });
+    if (!ticketType) {
+      throw new NotFoundException(`Ticket type with ID ${id} not found`);
+    }
+    return ticketType;
+  }
+
+  async updateTicketTypeSold(ticketType: TicketType): Promise<TicketType> {
+    return this.ticketTypeRepo.save(ticketType);
+  }
+
+  async getEventWithTicketTypes(eventId: number): Promise<Event> {
+    const event = await this.eventRepo.findOne({
+      where: { id: eventId },
+      relations: ['ticketTypes', 'organizer'],
+    });
+    if (!event) {
+      throw new NotFoundException(`Event with ID ${eventId} not found`);
+    }
+    return event;
+  }
 }

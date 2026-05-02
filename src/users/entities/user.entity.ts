@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -8,30 +8,37 @@ export enum UserRole {
 
 export enum UserStatus {
   ACTIVE = 'active',
-  PENDING = 'pending',
   INACTIVE = 'inactive',
+  SUSPENDED = 'suspended',
+  PENDING = 'pending',
 }
 
-@Entity('users')
+@Entity('USERS')
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'ID', type: 'number' })
   id: number;
 
-  @Column({ length: 100 })
+  @Column({ name: 'NAME', type: 'varchar2', length: 255 })
   name: string;
 
-  @Column({ unique: true, length: 150 })
+  @Column({ name: 'EMAIL', type: 'varchar2', length: 255, unique: true })
   email: string;
 
-  @Column()
+  @Column({ name: 'PASSWORD', type: 'varchar2', length: 255 })
   password: string;
 
-  @Column({ type: 'varchar2', length: 20, default: UserRole.CUSTOMER })
-  role: UserRole;
+  @Column({ name: 'ROLE', type: 'varchar2', length: 20, default: UserRole.CUSTOMER })
+  role: string;
 
-  @Column({ type: 'varchar2', length: 20, default: UserStatus.ACTIVE })
-  status: UserStatus;
+  @Column({ name: 'PHONE', type: 'varchar2', length: 20, nullable: true })
+  phone: string;
 
-  @CreateDateColumn()
+  @Column({ name: 'STATUS', type: 'varchar2', length: 20, default: UserStatus.PENDING })
+  status: string;
+
+  @CreateDateColumn({ name: 'CREATED_AT', type: 'timestamp' })
   createdAt: Date;
+
+  @UpdateDateColumn({ name: 'UPDATED_AT', type: 'timestamp' })
+  updatedAt: Date;
 }

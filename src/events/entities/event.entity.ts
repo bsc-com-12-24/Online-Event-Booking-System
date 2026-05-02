@@ -4,46 +4,48 @@ import {
   PrimaryGeneratedColumn, 
   CreateDateColumn,
   ManyToOne,
-  OneToMany 
+  OneToMany,
+  JoinColumn
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
 import { TicketType } from './ticket-type.entity';
 
-@Entity('events')
+@Entity({ name: 'EVENTS' })
 export class Event {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'ID' })
   id: number;
 
-  @Column({ length: 200 })
+  @Column({ name: 'TITLE', length: 200 })
   title: string;
 
-  @Column({ type: 'date' })
+  @Column({ name: 'EVENT_DATE', type: 'date' })
   date: Date;
 
-  @Column({ length: 10 })
+  @Column({ name: 'TIME', length: 10 })
   time: string;
 
-  @Column({ length: 200 })
+  @Column({ name: 'VENUE', length: 200 })
   venue: string;
 
-  @Column()
+  @Column({ name: 'CAPACITY' })
   capacity: number;
 
-  @Column({ nullable: true, length: 500 })
+  @Column({ name: 'POSTER', nullable: true, length: 500 })
   poster: string;
 
-  @Column({ length: 50, nullable: true })
+  @Column({ name: 'CATEGORY', length: 50, nullable: true })
   category: string;
 
-  @Column({ type: 'varchar2', length: 20, default: 'active' })
+  @Column({ name: 'STATUS', length: 20, default: 'active' })
   status: string;
 
-  @ManyToOne(() => User, { eager: true })
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'ORGANIZER_ID' })
   organizer: User;
 
   @OneToMany(() => TicketType, (ticketType) => ticketType.event, { cascade: true })
   ticketTypes: TicketType[];
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'CREATED_AT' })
   createdAt: Date;
 }

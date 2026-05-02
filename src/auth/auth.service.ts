@@ -26,8 +26,10 @@ export class AuthService {
       dto.role === UserRole.ORGANIZER ? UserStatus.PENDING : UserStatus.ACTIVE;
 
     const user = await this.usersService.create({
-      ...dto,
+      name: dto.name,
+      email: dto.email,
       password: hashed,
+      role: dto.role,
       status,
     });
 
