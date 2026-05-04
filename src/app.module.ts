@@ -6,6 +6,7 @@ import { UsersModule } from './users/users.module';
 import { AdminModule } from './admin/admin.module';
 import { EventsModule } from './events/events.module';
 import { OrganizerModule } from './organizer/organizer.module';
+import { BookingModule } from './bookings/booking.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { OrganizerModule } from './organizer/organizer.module';
         password: config.get('DB_PASSWORD'),
         serviceName: config.get('DB_SERVICE_NAME'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
+        synchronize: false,
         logging: true,
       }),
     }),
@@ -30,6 +31,7 @@ import { OrganizerModule } from './organizer/organizer.module';
     AdminModule,
     EventsModule,
     OrganizerModule,
+    BookingModule,
   ],
 })
 export class AppModule {}

@@ -12,26 +12,29 @@ export enum UserStatus {
   INACTIVE = 'inactive',
 }
 
-@Entity('users')
+@Entity({ name: 'USERS' })
 export class User {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'ID' })
   id: number;
 
-  @Column({ length: 100 })
+  @Column({ name: 'NAME', length: 100 })
   name: string;
 
-  @Column({ unique: true, length: 150 })
+  @Column({ name: 'EMAIL', unique: true, length: 150 })
   email: string;
 
-  @Column()
+  @Column({ name: 'PHONE', length: 20, nullable: true })
+  phone: string;
+
+  @Column({ name: 'PASSWORD' })
   password: string;
 
-  @Column({ type: 'varchar2', length: 20, default: UserRole.CUSTOMER })
+  @Column({ name: 'ROLE', length: 20, default: UserRole.CUSTOMER })
   role: UserRole;
 
-  @Column({ type: 'varchar2', length: 20, default: UserStatus.ACTIVE })
+  @Column({ name: 'STATUS', length: 20, default: UserStatus.ACTIVE })
   status: UserStatus;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'CREATED_AT' })
   createdAt: Date;
 }
