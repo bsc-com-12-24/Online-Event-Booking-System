@@ -7,6 +7,7 @@ import { AdminModule } from './admin/admin.module';
 import { EventsModule } from './events/events.module';
 import { OrganizerModule } from './organizer/organizer.module';
 import { BookingModule } from './bookings/booking.module';
+import { VerificationModule } from './verification/verification.module';  // Add this line
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { BookingModule } from './bookings/booking.module';
     EventsModule,
     OrganizerModule,
     BookingModule,
+    VerificationModule,  // Add this line
   ],
 })
 export class AppModule {}
