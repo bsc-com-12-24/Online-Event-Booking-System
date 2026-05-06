@@ -6,6 +6,11 @@ import { UsersModule } from './users/users.module';
 import { AdminModule } from './admin/admin.module';
 import { EventsModule } from './events/events.module';
 import { OrganizerModule } from './organizer/organizer.module';
+import { BookingModule } from './bookings/booking.module';
+import { VerificationModule } from './verification/verification.module';
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
@@ -30,8 +35,9 @@ import { OrganizerModule } from './organizer/organizer.module';
     EventsModule,
     OrganizerModule,
     BookingModule,
-    NotificationsModule,
-    VerificationModule,
+    VerificationModule,  // Add this line
   ],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
